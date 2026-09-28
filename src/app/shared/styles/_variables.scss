@@ -1,0 +1,95 @@
+// Renally design tokens. This is the only place Figma values are written.
+// theme.css maps these custom properties onto Tailwind utilities.
+
+$font-national-name: "National Park";
+$font-family-national: $font-national-name, sans-serif;
+
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$text-6: 6px;
+$text-12: 12px;
+$text-14: 14px;
+$text-15: 15px;
+$text-16: 16px;
+$text-17: 17px;
+$text-18: 18px;
+$text-19: 19px;
+$text-20: 20px;
+$text-24: 24px;
+$text-28: 28px;
+$text-32: 32px;
+$text-40: 40px;
+$text-52: 52px;
+$text-54: 54px;
+
+$color-cream: #F2E6D8;
+$color-moss-green: #294236;
+$color-golden: #ED9D07;
+$color-sky-blue: #8FBFE3;
+$color-menu-surface: #E4E2D4;
+$color-menu-pill: #F4F1E4;
+$color-deep-forest: #456756;
+$color-white: #ffffff;
+
+// Mobile is the default. Keep these aligned with --breakpoint-* in theme.css.
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1280px;
+
+:root {
+  --rn-font-national: "#{$font-national-name}", sans-serif;
+  --font-national: var(--rn-font-national);
+
+  --rn-font-weight-regular: #{$font-weight-regular};
+  --rn-font-weight-semibold: #{$font-weight-semibold};
+  --rn-font-weight-bold: #{$font-weight-bold};
+  --font-weight-regular: var(--rn-font-weight-regular);
+  --font-weight-semibold: var(--rn-font-weight-semibold);
+  --font-weight-bold: var(--rn-font-weight-bold);
+
+  --rn-text-6: #{$text-6};
+  --rn-text-12: #{$text-12};
+  --rn-text-14: #{$text-14};
+  --rn-text-15: #{$text-15};
+  --rn-text-16: #{$text-16};
+  --rn-text-17: #{$text-17};
+  --rn-text-18: #{$text-18};
+  --rn-text-19: #{$text-19};
+  --rn-text-20: #{$text-20};
+  --rn-text-24: #{$text-24};
+  --rn-text-28: #{$text-28};
+  --rn-text-32: #{$text-32};
+  --rn-text-40: #{$text-40};
+  --rn-text-52: #{$text-52};
+  --rn-text-54: #{$text-54};
+  --text-6: var(--rn-text-6);
+  --text-12: var(--rn-text-12);
+  --text-13: var(--rn-text-13);
+  --text-14: var(--rn-text-14);
+  --text-15: var(--rn-text-15);
+  --text-16: var(--rn-text-16);
+  --text-17: var(--rn-text-17);
+  --text-18: var(--rn-text-18);
+  --text-19: var(--rn-text-19);
+  --text-20: var(--rn-text-20);
+  --text-24: var(--rn-text-24);
+  --text-28: var(--rn-text-28);
+  --text-32: var(--rn-text-32);
+  --text-40: var(--rn-text-40);
+  --text-52: var(--rn-text-52);
+  --text-54: var(--rn-text-54);
+
+  --rn-color-cream: #{$color-cream};
+  --rn-color-moss-green: #{$color-moss-green};
+  --rn-color-golden: #{$color-golden};
+  --rn-color-sky-blue: #{$color-sky-blue};
+  --rn-color-deep-forest: #{$color-deep-forest};
+  --rn-color-white: #{$color-white};
+  --color-cream: var(--rn-color-cream);
+  --color-moss-green: var(--rn-color-moss-green);
+  --color-golden: var(--rn-color-golden);
+  --color-sky-blue: var(--rn-color-sky-blue);
+  --color-deep-forest: var(--rn-color-deep-forest);
+  --color-white: var(--rn-color-white);
+}

@@ -1,0 +1,237 @@
+:host {
+  display: block;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 300ms ease-in-out,
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out;
+}
+
+.hero-button-primary {
+  background: var(--color-golden);
+  color: var(--color-moss-green);
+}
+
+.hero-button-primary:hover {
+  background: var(--color-cream);
+}
+
+.hero-button-sky {
+  background: var(--color-sky-blue);
+  color: var(--color-moss-green);
+}
+
+.hero-button-sky:hover {
+  background: var(--color-moss-green);
+  color: var(--color-cream);
+}
+
+.section-button {
+  padding: 18px 32px;
+  font-size: 16px;
+}
+
+.hero-button-secondary {
+  border: 1.5px solid var(--color-cream);
+  color: var(--color-cream);
+}
+
+.hero-button-secondary:hover {
+  border-color: var(--color-golden);
+  color: var(--color-golden);
+}
+
+.hero-mobile .hero-button {
+  padding: 1.125rem 2rem;
+}
+
+.hero-mobile-photo {
+  display: block;
+  width: min(100%, 637px);
+  height: auto;
+  margin-top: 2rem;
+  margin-left: auto;
+}
+
+// Desktop artboard is the Figma hero below the 124px nav: 1230 x 484.
+// The photo and curve are scaled together; type stays in the same proportion.
+.hero-desktop {
+  container-type: inline-size;
+}
+
+.hero-frame {
+  position: relative;
+  height: calc(100cqi * 484 / 1230);
+  overflow: hidden;
+  background: var(--color-moss-green);
+}
+
+.hero-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1230px;
+  height: 484px;
+  transform: scale(calc(100cqi / 1230px));
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.hero-photo {
+  position: absolute;
+  top: -121px;
+  right: 0;
+  width: 637px;
+  height: 605px;
+  max-width: none;
+  object-fit: cover;
+}
+
+.hero-shape {
+  position: absolute;
+  top: -8px;
+  left: 0;
+}
+
+.hero-copy {
+  position: absolute;
+  z-index: 1;
+  top: calc(100cqi * 54 / 1230);
+  left: calc(100cqi * 74 / 1230);
+  width: calc(100cqi * 577 / 1230);
+}
+
+.hero-title {
+  width: calc(100cqi * 519 / 1230);
+  font-size: calc(100cqi * 62 / 1230);
+  line-height: 1;
+}
+
+.hero-lead {
+  margin-top: calc(100cqi * 25 / 1230);
+  font-size: calc(100cqi * 24 / 1230);
+  line-height: calc(100cqi * 29 / 1230);
+}
+
+.hero-body {
+  margin-top: calc(100cqi * 25 / 1230);
+  font-size: calc(100cqi * 18 / 1230);
+  line-height: 1.55;
+}
+
+.hero-actions {
+  display: flex;
+  gap: calc(100cqi * 28 / 1230);
+  margin-top: calc(100cqi * 29 / 1230);
+}
+
+.hero-desktop .hero-button {
+  padding: calc(100cqi * 18 / 1230) calc(100cqi * 32 / 1230);
+  font-size: calc(100cqi * 16 / 1230);
+}
+
+.hero-note {
+  margin-top: calc(100cqi * 15 / 1230);
+  font-size: calc(100cqi * 15 / 1230);
+  line-height: 1;
+}
+
+.step {
+  position: relative;
+}
+
+.step-icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.step-card {
+  margin-left: 43px;
+  border-radius: 24px;
+  background: var(--color-white);
+  padding: 28px 24px 28px 58px;
+}
+
+.how {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-cream);
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 40px;
+}
+
+.how-copy {
+  padding: 3rem 1.5rem 2rem;
+}
+
+.how-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.care-photo {
+  display: block;
+  width: min(100%, 499px);
+  height: auto;
+}
+
+.cta {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-deep-forest);
+  border-top-left-radius: 32px;
+  padding: 4rem 1.5rem;
+}
+
+.cta-blob {
+  position: absolute;
+  top: -24px;
+  right: -240px;
+  pointer-events: none;
+}
+
+@media (min-width: 1280px) {
+  .how {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 574px);
+    align-items: center;
+    column-gap: 81px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 90px;
+    padding-left: 75px;
+  }
+
+  .how-copy {
+    width: min(100%, 500px);
+    padding: 96px 0;
+  }
+
+  .how-photo {
+    width: 100%;
+    height: auto;
+  }
+
+  .cta {
+    border-top-left-radius: 50px;
+    padding: 63px 75px 72px;
+  }
+
+  .cta-blob {
+    top: -32px;
+    right: -40px;
+  }
+}

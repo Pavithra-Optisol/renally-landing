@@ -1,0 +1,16 @@
+@use "variables" as *;
+
+// Mobile layouts are the default. Use these mixins from SCSS, or the
+// matching Tailwind variants `tablet:` and `desktop:` in templates.
+
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}

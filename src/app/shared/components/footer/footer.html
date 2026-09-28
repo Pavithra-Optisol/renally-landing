@@ -1,0 +1,154 @@
+<footer class="bg-moss-green text-cream rounded-b-[50px]">
+  <div class="mx-auto px-6 py-10 desktop:px-[75px] desktop:py-[54px]">
+    <div class="flex flex-col desktop:hidden">
+      <a [routerLink]="region.commands()">
+        <img class="h-[54px] w-auto" src="assets/images/png/logo.png" alt="Renally" />
+      </a>
+
+      <nav class="mt-8 flex flex-col gap-4" [attr.aria-label]="t('renallyHeading')">
+        @for (link of columnLinks; track link.section) {
+          <a
+            class=" text-16 font-regular text-cream transition-colors duration-300 ease-in-out hover:text-golden"
+            [routerLink]="region.commands(link.section)"
+          >
+            {{ t(link.id) }}
+          </a>
+        }
+      </nav>
+
+      <p class=" text-16 font-regular mt-8">{{ t('contact') }}</p>
+      <a
+        class=" text-16 font-regular mt-2 text-cream underline decoration-1 underline-offset-4"
+        [href]="'mailto:' + email"
+      >
+        {{ email }}
+      </a>
+
+      <hr class="mt-8 border-cream/40" />
+
+      <a
+        class="fresenius mt-8 flex flex-col items-start gap-3"
+        [href]="region.freseniusUrl()"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class=" text-14 font-regular">{{ t('sponsored') }}</span>
+        <img class="h-5 w-auto" src="assets/images/png/mediCare.png" alt="Fresenius Medical Care" />
+      </a>
+
+      <nav class="mt-8 flex flex-col gap-4" [attr.aria-label]="t('privacy')">
+        <a class=" text-14 font-regular text-cream hover:text-golden" [routerLink]="region.commands('privacy')">
+          {{ t('privacy') }}
+        </a>
+        <a class=" text-14 font-regular text-cream hover:text-golden" [routerLink]="region.commands('terms')">
+          {{ t('terms') }}
+        </a>
+      </nav>
+
+      <p class=" text-14 font-regular mt-8">
+        {{ t('powered') }}
+        <br />
+        © Supportal Health Ltd {{ year }}
+      </p>
+    </div>
+
+    <div class="hidden desktop:block">
+      <div class="grid grid-cols-[1.6fr_1fr_1fr] items-start gap-8">
+        <a [routerLink]="region.commands()" class="self-start">
+          <img class="h-[54px] w-auto" src="assets/images/png/logo.png" alt="Renally" />
+        </a>
+
+        <nav class="flex flex-col gap-3" [attr.aria-label]="t('renallyHeading')">
+          <p class=" text-14 font-regular tracking-wide uppercase">{{ t('renallyHeading') }}</p>
+          @for (link of columnLinks; track link.section) {
+            <a
+              class=" text-16 font-regular text-cream transition-colors duration-300 ease-in-out hover:text-golden"
+              [routerLink]="region.commands(link.section)"
+            >
+              {{ t(link.id) }}
+            </a>
+          }
+        </nav>
+
+        <div class="flex flex-col gap-3">
+          <p class=" text-14 font-regular tracking-wide uppercase">{{ t('contact') }}</p>
+          <a
+            class=" text-16 font-regular text-cream underline decoration-1 underline-offset-4"
+            [href]="'mailto:' + email"
+          >
+            {{ email }}
+          </a>
+          <ng-container *ngTemplateOutlet="socialAndLang" />
+        </div>
+      </div>
+
+      <p class=" text-14 font-regular mt-16 max-w-md leading-relaxed">
+        {{ t('disclaimer1') }}
+        <br />
+        {{ t('disclaimer2') }}
+      </p>
+
+      <hr class="mt-8 border-cream/40" />
+
+      <div class="mt-7 grid grid-cols-3 items-center">
+        <a
+          class="fresenius fresenius-row justify-self-start"
+          [href]="region.freseniusUrl()"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class=" text-14 font-regular">{{ t('sponsored') }}</span>
+          <img class="h-[24px] w-[116px] object-contain" src="assets/images/png/mediCare.png" alt="Fresenius Medical Care" />
+        </a>
+
+        <nav class="flex justify-center gap-16" [attr.aria-label]="t('privacy')">
+          <a class=" text-14 font-regular text-cream hover:text-golden" [routerLink]="region.commands('privacy')">
+            {{ t('privacy') }}
+          </a>
+          <a class=" text-14 font-regular text-cream hover:text-golden" [routerLink]="region.commands('terms')">
+            {{ t('terms') }}
+          </a>
+        </nav>
+
+        <p class=" text-14 font-regular justify-self-end text-right">
+          {{ t('powered') }} © Supportal Health Ltd {{ year }}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<ng-template #socialAndLang>
+  <div class="social-row mt-3">
+    <a class="social-link" href="#" aria-label="Facebook" title="Facebook link to be confirmed">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M14.5 8.5V6.8c0-.7.5-1 1.2-1H17V3h-2.1C12.4 3 11 4.5 11 6.6v1.9H9v2.8h2V21h3.5v-9.7h2.3l.4-2.8h-2.7z"
+        />
+      </svg>
+    </a>
+    <a class="social-link" [href]="instagramUrl" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm10 1.8H7A2.2 2.2 0 0 0 4.8 7v10A2.2 2.2 0 0 0 7 19.2h10a2.2 2.2 0 0 0 2.2-2.2V7A2.2 2.2 0 0 0 17 4.8zM12 8.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2zm0 1.6A2.2 2.2 0 1 0 14.2 12 2.2 2.2 0 0 0 12 9.8zM17.4 6.4a.9.9 0 1 1-.9.9.9.9 0 0 1 .9-.9z"
+        />
+      </svg>
+    </a>
+  </div>
+  <ul class="lang-list mt-3">
+    @for (item of language.languages; track item.id) {
+      <li>
+        <button
+          type="button"
+          class="lang-button  text-14 font-regular"
+          [class.is-active]="language.lang() === item.id"
+          (click)="language.setLanguage(item.id)"
+        >
+          {{ item.label }}
+        </button>
+      </li>
+    }
+  </ul>
+</ng-template>

@@ -1,0 +1,74 @@
+<header class="relative z-30 ">
+  <div class="desktop-bar hidden items-center bg-moss-green desktop:grid px-[75px] py-[36px] rounded-t-[50px]">
+    <a [routerLink]="region.commands()" class="justify-self-start">
+      <img src="assets/images/png/logo.png" alt="Logo" />
+    </a>
+
+    <nav class="nav-track justify-self-center" [attr.aria-label]="t('menu')">
+      <span class="nav-pill" aria-hidden="true">
+        @for (side of ['left', 'right']; track side) {
+        <span [class]="'neck neck-' + side">
+          @for (part of ['top', 'bottom']; track part) {
+          <svg [class]="'neck-' + part" viewBox="0 0 68 22">
+            <path class="neck-fill" d="M0 .75C16 .75 22 1.2 28 7.5C32 13.2 34 16.5 40 16.5C46 16.5 48 13.2 52 7.5C58 1.2 62 .75 68 .75L68 0L0 0Z" />
+            <path class="neck-line" d="M0 .75C16 .75 22 1.2 28 7.5C32 13.2 34 16.5 40 16.5C46 16.5 48 13.2 52 7.5C58 1.2 62 .75 68 .75" />
+          </svg>
+          }
+        </span>
+        }
+      </span>
+      @for (link of desktopLinks; track link.id) {
+      <a class="nav-link  text-17 font-regular"
+        [routerLink]="region.commands(link.section)" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: link.exact }">
+        {{ t(link.id) }}
+      </a>
+      }
+    </nav>
+
+    <div class="sign-in-wrap justify-self-end">
+      <a class="sign-in-link  text-17 font-regular" [href]="signInUrl">
+        {{ t('signIn') }}
+      </a>
+    </div>
+  </div>
+  <div class="mobile-shell px-4 pt-4 pb-2 desktop:hidden">
+    @for (url of [region.url()]; track url) {
+    <input id="nav-toggle" class="nav-toggle" type="checkbox" [attr.aria-label]="t('menu')" />
+    }
+
+    <div class="mobile-closed">
+      <a [routerLink]="region.commands()">
+        <img class="mobile-logo" src="assets/images/png/logo.png" alt="Logo" />
+      </a>
+      <label class="menu-button" for="nav-toggle">
+        <span class="sr-label">{{ t('menu') }}</span>
+        <span class="menu-glyph" aria-hidden="true"></span>
+      </label>
+    </div>
+
+    <div class="mobile-open">
+      <div class="mobile-open-bar">
+        <a [routerLink]="region.commands()">
+          <span class="mobile-logo mobile-logo-moss" role="img" aria-label="Logo"></span>
+        </a>
+        <label class="menu-button menu-button-dark" for="nav-toggle">
+          <span class="sr-label">{{ t('menu') }}</span>
+          <span class="menu-glyph menu-glyph-close" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <nav class="mobile-links" [attr.aria-label]="t('menu')">
+        @for (link of mobileLinks; track link.id) {
+        <a class="mobile-link  text-16 font-regular" [routerLink]="region.commands(link.section)"
+          routerLinkActive="active" [routerLinkActiveOptions]="{ exact: link.exact }">
+          {{ t(link.id) }}
+        </a>
+        }
+        <a class="sign-in-mobile  text-16 font-regular" [href]="signInUrl">
+          {{ t('signInMobile') }}
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,48 @@
+/* Maps Renally tokens from _variables.scss onto Tailwind.
+   Default colors, font sizes, and font weights are cleared so Figma values win. */
+
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+
+  --color-transparent: transparent;
+  --color-current: currentcolor;
+
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1280px;
+}
+
+@theme inline {
+  --font-sans: var(--rn-font-national);
+  --font-national: var(--rn-font-national);
+
+  --font-weight-regular: var(--rn-font-weight-regular);
+  --font-weight-semibold: var(--rn-font-weight-semibold);
+  --font-weight-bold: var(--rn-font-weight-bold);
+
+  --text-6: var(--rn-text-6);
+  --text-12: var(--rn-text-12);
+  --text-14: var(--rn-text-14);
+  --text-15: var(--rn-text-15);
+  --text-16: var(--rn-text-16);
+  --text-17: var(--rn-text-17);
+  --text-18: var(--rn-text-18);
+  --text-19: var(--rn-text-19);
+  --text-20: var(--rn-text-20);
+  --text-24: var(--rn-text-24);
+  --text-28: var(--rn-text-28);
+  --text-32: var(--rn-text-32);
+  --text-40: var(--rn-text-40);
+  --text-52: var(--rn-text-52);
+  --text-54: var(--rn-text-54);
+
+  --color-cream: var(--rn-color-cream);
+  --color-moss-green: var(--rn-color-moss-green);
+  --color-golden: var(--rn-color-golden);
+  --color-sky-blue: var(--rn-color-sky-blue);
+  --color-deep-forest: var(--rn-color-deep-forest);
+  --color-white: var(--rn-color-white);
+  --color-menu-surface: var(--rn-color-menu-surface);
+  --color-menu-pill: var(--rn-color-menu-pill);
+}

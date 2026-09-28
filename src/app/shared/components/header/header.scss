@@ -1,0 +1,402 @@
+@use "sass:list";
+
+$track-border: 1.5px;
+$track-height: 61px;
+$pill-height: 45px;
+// Distance from the pill edge to the outside of the track border.
+$neck-outset: ($track-height - $pill-height) * 0.5;
+// A short rounded scoop. Its deepest point sits just outside the pill so the
+// capsule stays intact. Curved `d` matches the paths in header.html.
+$neck-width: 68px;
+$neck-height: 22px;
+$neck-overlap: 36px;
+$nav-count: 5;
+$slide: 420ms cubic-bezier(0.22, 1, 0.36, 1);
+$bend-duration: 640ms;
+$bend-easing: cubic-bezier(0.22, 1, 0.36, 1);
+
+$neck-paths: (
+  fill: (
+    "M0 .75C16 .75 22 .75 28 .75C32 .75 34 .75 40 .75C46 .75 48 .75 52 .75C58 .75 62 .75 68 .75L68 0L0 0Z",
+    "M0 .75C16 .75 22 1.2 28 7.5C32 13.2 34 16.5 40 16.5C46 16.5 48 13.2 52 7.5C58 1.2 62 .75 68 .75L68 0L0 0Z",
+  ),
+  line: (
+    "M0 .75C16 .75 22 .75 28 .75C32 .75 34 .75 40 .75C46 .75 48 .75 52 .75C58 .75 62 .75 68 .75",
+    "M0 .75C16 .75 22 1.2 28 7.5C32 13.2 34 16.5 40 16.5C46 16.5 48 13.2 52 7.5C58 1.2 62 .75 68 .75",
+  ),
+);
+
+// One keyframe set per nav position: changing the animation name restarts it,
+// so every move straightens the neck and then bends it inward again.
+@each $name, $pair in $neck-paths {
+  @for $i from 1 through $nav-count {
+    @keyframes neck-#{$name}-#{$i} {
+      0% {
+        d: path("#{list.nth($pair, 2)}");
+      }
+      16% {
+        d: path("#{list.nth($pair, 1)}");
+      }
+      100% {
+        d: path("#{list.nth($pair, 2)}");
+      }
+    }
+  }
+}
+
+:host {
+  display: block;
+}
+
+.desktop-bar {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  column-gap: 1.5rem;
+}
+
+.nav-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: $track-height;
+  border: $track-border solid var(--color-cream);
+  border-radius: 999px;
+  padding: 0 18px;
+}
+
+.nav-pill {
+  position: absolute;
+  z-index: 0;
+  position-anchor: --nav-target;
+  top: anchor(top);
+  left: anchor(left);
+  width: anchor-size(width);
+  height: anchor-size(height);
+  border-radius: 999px;
+  background: var(--color-cream);
+  pointer-events: none;
+  transition:
+    left $slide,
+    width $slide,
+    top $slide,
+    height $slide,
+    opacity 250ms ease-in-out;
+}
+
+.neck {
+  position: absolute;
+  top: -$neck-outset;
+  bottom: -$neck-outset;
+  width: $neck-width;
+  transition: opacity 250ms ease-in-out;
+}
+
+.neck-left {
+  right: calc(100% - #{$neck-overlap});
+  transform: scaleX(-1);
+}
+
+.neck-right {
+  left: calc(100% - #{$neck-overlap});
+}
+
+.neck svg {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: $neck-width;
+  height: $neck-height;
+  overflow: visible;
+}
+
+.neck-top {
+  top: 0;
+}
+
+.neck-bottom {
+  bottom: 0;
+  transform: scaleY(-1);
+}
+
+.neck path {
+  animation-duration: $bend-duration;
+  animation-timing-function: $bend-easing;
+  animation-fill-mode: both;
+}
+
+.neck-fill {
+  fill: var(--color-moss-green);
+}
+
+.neck-line {
+  fill: none;
+  stroke: var(--color-cream);
+  stroke-width: $track-border;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@for $i from 1 through $nav-count {
+  $hovered: ".nav-track:has(a.nav-link:nth-of-type(#{$i}):hover)";
+  $resting: ".nav-track:not(:has(.nav-link:hover)):has(a.nav-link:nth-of-type(#{$i}).active)";
+
+  @each $kind in (fill, line) {
+    #{$hovered} .neck-#{$kind},
+    #{$resting} .neck-#{$kind} {
+      animation-name: neck-#{$kind}-#{$i};
+    }
+  }
+}
+
+.nav-link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  height: $pill-height;
+  padding: 0 20px;
+  color: var(--color-cream);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    anchor-name: --nav-target;
+    color: var(--color-moss-green);
+  }
+}
+
+.nav-track:not(:has(.nav-link:hover)) .nav-link.active {
+  anchor-name: --nav-target;
+  color: var(--color-moss-green);
+}
+
+.nav-track:not(:has(.nav-link:hover)):not(:has(.nav-link.active)) .nav-pill {
+  opacity: 0;
+}
+
+.nav-track:has(a.nav-link:first-of-type:hover) .neck-left,
+.nav-track:not(:has(.nav-link:hover)):has(a.nav-link:first-of-type.active) .neck-left,
+.nav-track:has(a.nav-link:last-of-type:hover) .neck-right,
+.nav-track:not(:has(.nav-link:hover)):has(a.nav-link:last-of-type.active) .neck-right {
+  opacity: 0;
+}
+
+.sign-in-wrap {
+  display: flex;
+  align-items: center;
+  height: $track-height;
+  padding: 8px;
+  border: $track-border solid var(--color-cream);
+  border-radius: 999px;
+}
+
+.sign-in-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--color-cream);
+  color: var(--color-moss-green);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 300ms ease-in-out;
+}
+
+.sign-in-link:hover {
+  background: var(--color-white);
+}
+
+.mobile-logo {
+  display: block;
+  width: 108px;
+  aspect-ratio: 145 / 54;
+}
+
+// logo.png is cream; the open menu card is light, so the PNG is used as a mask filled with moss.
+.mobile-logo-moss {
+  background: var(--color-moss-green);
+  mask: url("/assets/images/png/logo.png") center / contain no-repeat;
+}
+
+.nav-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.mobile-closed,
+.mobile-open {
+  border-radius: 28px;
+}
+
+.mobile-closed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.8rem 0.7rem 1.1rem;
+  background: var(--color-moss-green);
+}
+
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1.5px solid var(--color-cream);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.menu-button-dark {
+  border-color: var(--color-moss-green);
+}
+
+.sr-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.menu-glyph {
+  position: relative;
+  width: 0.95rem;
+  height: 0.7rem;
+}
+
+.menu-glyph::before,
+.menu-glyph::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-cream);
+  transition:
+    transform 300ms ease-in-out,
+    top 300ms ease-in-out;
+}
+
+.menu-glyph::before {
+  top: 0;
+}
+
+.menu-glyph::after {
+  top: 0.5rem;
+}
+
+.menu-glyph-close::before,
+.menu-glyph-close::after {
+  background: var(--color-moss-green);
+  top: 0.2rem;
+}
+
+.menu-glyph-close::before {
+  transform: rotate(45deg);
+}
+
+.menu-glyph-close::after {
+  transform: rotate(-45deg);
+}
+
+.mobile-open {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background: var(--color-menu-surface);
+  transform: translateY(-0.5rem);
+  pointer-events: none;
+  transition:
+    max-height 350ms ease-in-out,
+    opacity 300ms ease-in-out,
+    transform 350ms ease-in-out,
+    visibility 0s linear 350ms;
+}
+
+.nav-toggle:checked ~ .mobile-closed {
+  display: none;
+}
+
+.nav-toggle:checked ~ .mobile-open {
+  max-height: 36rem;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    max-height 350ms ease-in-out,
+    opacity 300ms ease-in-out,
+    transform 350ms ease-in-out,
+    visibility 0s;
+}
+
+.mobile-open-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0.8rem 0.4rem 1.1rem;
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.4rem 0.85rem 1rem;
+}
+
+.mobile-link {
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  color: var(--color-moss-green);
+  text-decoration: none;
+  transition:
+    background-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.mobile-link.active {
+  background: var(--color-menu-pill);
+}
+
+.sign-in-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.85rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--color-moss-green);
+  border-radius: 999px;
+  color: var(--color-moss-green);
+  text-decoration: none;
+  transition:
+    background-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.sign-in-mobile:hover {
+  background: var(--color-moss-green);
+  color: var(--color-cream);
+}
+
+@supports not (anchor-name: --nav-target) {
+  .nav-pill {
+    display: none;
+  }
+
+  .nav-link:hover,
+  .nav-track:not(:has(.nav-link:hover)) .nav-link.active {
+    border-radius: 999px;
+    background: var(--color-cream);
+    color: var(--color-moss-green);
+  }
+}

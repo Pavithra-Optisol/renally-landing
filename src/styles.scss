@@ -1,0 +1,12 @@
+@use "./app/shared/styles/variables";
+@use "./app/shared/styles/typography";
+@use "./app/shared/styles/common";
+@use "./app/shared/styles/responsive";
+
+// Tailwind must reach PostCSS unparsed by Sass, so these stay plain `.css` imports.
+@import "tailwindcss/index.css";
+@import "./styles/theme.css";
+
+@source "./app/**/*.html";
+@source "./index.html";
+@source not "./**/*.ts";

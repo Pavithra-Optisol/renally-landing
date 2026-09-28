@@ -1,0 +1,115 @@
+<section class="hero-mobile bg-moss-green px-6 pt-10 desktop:hidden">
+  <div class="flex max-w-[34rem] flex-col">
+    <h1 class=" text-40 font-semibold leading-none text-cream tablet:text-52">
+      {{ t('tagline') }}
+    </h1>
+    <p class=" text-20 font-regular mt-5 text-sky-blue">{{ t('heroLead') }}</p>
+    <p class=" text-16 font-regular mt-4 leading-[1.55] text-cream">{{ t('heroBody') }}</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a class="hero-button hero-button-primary  text-16 font-regular" [routerLink]="region.commands('mentor')">
+        {{ t('mentor') }}
+      </a>
+      <a class="hero-button hero-button-secondary  text-16 font-regular" [routerLink]="region.commands('talk')">
+        {{ t('talk') }}*
+      </a>
+    </div>
+    <p class=" text-14 font-regular mt-4 text-cream">{{ t('heroNote') }}</p>
+  </div>
+  <img class="hero-mobile-photo" src="assets/images/png/homeBanner1.png" alt="" />
+</section>
+
+<section class="hero-desktop hidden desktop:block">
+  <div class="hero-frame">
+    <div class="hero-media" aria-hidden="true">
+      <img class="hero-photo" src="assets/images/png/homeBanner1.png" alt="" />
+      <img class="hero-shape" src="assets/images/svg/heroUnion.svg" alt="" />
+    </div>
+    <div class="hero-copy">
+      <h1 class="hero-title  font-semibold text-cream">{{ t('tagline') }}</h1>
+      <p class="hero-lead  font-regular text-sky-blue">{{ t('heroLead') }}</p>
+      <p class="hero-body  font-regular text-cream">{{ t('heroBody') }}</p>
+      <div class="hero-actions">
+        <a class="hero-button hero-button-primary  font-regular" [routerLink]="region.commands('mentor')">
+          {{ t('mentor') }}
+        </a>
+        <a class="hero-button hero-button-secondary  font-regular" [routerLink]="region.commands('talk')">
+          {{ t('talk') }}*
+        </a>
+      </div>
+      <p class="hero-note  font-regular text-cream">{{ t('heroNote') }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-cream px-6 py-12 rounded-tl-[32px] rounded-br-[40px] desktop:flex desktop:items-center desktop:justify-between desktop:gap-16 desktop:rounded-tl-[90px] desktop:rounded-br-[50px] desktop:px-[75px] desktop:py-24">
+  <div class="max-w-[499px]">
+    <h2 class=" text-32 font-semibold leading-none text-moss-green desktop:text-40">{{ t('conversationTitle') }}</h2>
+    <p class=" text-16 font-regular mt-6 leading-[1.6] text-moss-green desktop:mt-10 desktop:text-17">{{ t('conversationBody') }}</p>
+  </div>
+  <div class="mt-8 rounded-tr-[48px] rounded-bl-[32px] bg-white p-6 desktop:mt-0 desktop:w-[500px] desktop:shrink-0 desktop:rounded-tr-[90px] desktop:rounded-bl-[50px] desktop:p-10">
+    <p class=" text-18 font-regular leading-normal text-moss-green desktop:text-19">{{ t('topicsIntro') }}</p>
+    <ul class="mt-5 flex flex-col gap-1 pl-4">
+      @for (topic of topics; track topic) {
+        <li class="flex items-start gap-3.5">
+          <span class="mt-[7px] size-2.5 shrink-0 rounded-full bg-golden"></span>
+          <span class=" text-16 font-regular leading-[1.5] text-moss-green">{{ t(topic) }}</span>
+        </li>
+      }
+    </ul>
+    <p class=" text-16 font-regular mt-5 leading-[1.5] text-moss-green desktop:text-19">{{ t('topicsOutro') }}</p>
+  </div>
+</section>
+
+<section class="bg-white px-6 py-12 desktop:px-[75px] desktop:py-24">
+  <h2 class=" text-32 font-semibold leading-none text-moss-green desktop:text-40">{{ t('twoWaysTitle') }}</h2>
+  <div class="mt-8 flex flex-col gap-5 desktop:mt-11 desktop:flex-row desktop:items-stretch desktop:gap-[22px]">
+    <article class="flex flex-1 flex-col rounded-tl-[30px] rounded-br-[40px] border-2 border-deep-forest bg-white p-6 desktop:rounded-br-[50px] desktop:p-11">
+      <span class="w-fit rounded-full bg-sky-blue px-3.5 py-1.5  text-12 font-regular uppercase tracking-[0.06em] text-moss-green">{{ t('availableSoon') }}</span>
+      <h3 class=" text-24 font-semibold leading-[1.2] text-deep-forest mt-6 desktop:text-28">{{ t('talkCardTitle') }}</h3>
+      <p class=" text-16 font-regular mt-5 flex-1 leading-[1.6] text-deep-forest">{{ t('talkCardBody') }}</p>
+      <a class="hero-button section-button hero-button-sky mt-6 self-start" [routerLink]="region.commands('talk')">{{ t('learnMore') }}</a>
+    </article>
+    <article class="flex flex-1 flex-col rounded-tr-[30px] rounded-bl-[40px] bg-cream p-6 desktop:rounded-bl-[50px] desktop:p-11">
+      <span class="w-fit rounded-full bg-golden px-3.5 py-1.5  text-12 font-regular uppercase tracking-[0.06em] text-moss-green">{{ t('openNow') }}</span>
+      <h3 class=" text-24 font-semibold leading-[1.2] text-moss-green mt-6 desktop:text-28">{{ t('mentorCardTitle') }}</h3>
+      <p class=" text-16 font-regular mt-5 flex-1 leading-[1.6] text-moss-green">{{ t('mentorCardBody') }}</p>
+      <a class="hero-button section-button hero-button-primary mt-6 self-start" [routerLink]="region.commands('mentor')">{{ t('learnMore') }}</a>
+    </article>
+  </div>
+</section>
+
+<section class="how">
+  <div class="how-copy">
+    <h2 class=" text-32 font-semibold leading-none text-moss-green desktop:text-40">{{ t('stepsTitle') }}</h2>
+    <ul class="mt-8 flex flex-col gap-6 desktop:mt-11 desktop:gap-[25px]">
+      @for (step of steps; track step.title) {
+        <li class="step">
+          <img class="step-icon" [src]="step.icon" alt="" />
+          <div class="step-card">
+            <p class=" text-18 font-regular leading-[1.3] text-moss-green desktop:text-19">{{ t(step.title) }}</p>
+            <p class=" text-15 font-regular mt-2 leading-[1.55] text-moss-green">{{ t(step.body) }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+  <img class="how-photo" src="assets/images/png/homeBanner2.png" alt="" />
+</section>
+
+<section class="flex flex-col gap-8 bg-white px-6 py-12 rounded-tl-[32px] desktop:flex-row desktop:items-center desktop:gap-20 desktop:rounded-tl-[90px] desktop:px-[75px] desktop:py-24">
+  <img class="care-photo" src="assets/images/png/homeBanner3.png" alt="" />
+  <div class="max-w-[500px]">
+    <h2 class=" text-28 font-semibold leading-none text-moss-green desktop:text-[34px]">{{ t('careTitle') }}</h2>
+    <p class=" text-16 font-regular mt-6 leading-[1.65] text-moss-green desktop:mt-10 desktop:text-17">{{ t('careBody1') }}</p>
+    <p class=" text-16 font-regular mt-4 leading-[1.65] text-moss-green desktop:text-17">{{ t('careBody2') }}</p>
+  </div>
+</section>
+
+<section class="cta">
+  <img class="cta-blob" src="assets/images/svg/ctaBlob.svg" alt="" />
+  <div class="relative mx-auto flex max-w-[681px] flex-col items-center text-center">
+    <h2 class=" text-32 font-semibold leading-[1.15] text-cream desktop:text-40">{{ t('ctaTitle') }}</h2>
+    <p class=" text-16 font-regular mt-5 leading-[1.6] text-cream desktop:text-18">{{ t('ctaBody') }}</p>
+    <a class="hero-button section-button hero-button-primary mt-8" [routerLink]="region.commands('mentor')">{{ t('mentor') }}</a>
+  </div>
+</section>
